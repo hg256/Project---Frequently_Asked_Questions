@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<style> 
+<style>
     .bgstyle{
         padding-bottom: 11rem!important;
     }
