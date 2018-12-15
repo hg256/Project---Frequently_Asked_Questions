@@ -125,7 +125,8 @@
                         Create a Question
                     </a>
                     <div class="float-right">
-                     <!--  {{ $questions->links() }} -->
+
+
                     </div>
                 </div>
                 @forelse($questions as $question)
@@ -175,7 +176,11 @@
                     There are no questions to view, you can  create a question.
                 @endforelse
             </div>
-
+            <dil class="card-footer">
+                <div class="float-right">
+                    {{$questions->links()}}
+                </div>
+            </dil>
 
         </div>
         <div class="sidenav">
@@ -198,6 +203,7 @@
                         <li>Upvote/downvote for an answer <br/>
                         </li>
                     </div>
+
                 </div>
             </div>
 
