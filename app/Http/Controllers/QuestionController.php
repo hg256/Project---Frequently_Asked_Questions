@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
+
 class QuestionController extends Controller
 {
     public function __construct()
@@ -64,6 +65,8 @@ class QuestionController extends Controller
         // return redirect()->route('questions.show', ['id' => $question->id]);
 
     }
+
+
     /**
      * Display the specified resource.
      *
