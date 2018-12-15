@@ -125,7 +125,7 @@
                         Create a Question
                     </a>
                     <div class="float-right">
-{{--                        {{ $questions->links() }}--}}
+                       {{ $questions->links() }}
                     </div>
                 </div>
                 @forelse($questions as $question)
