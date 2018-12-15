@@ -178,7 +178,30 @@
 
 
         </div>
-        
+        <div class="sidenav">
+            <div class="card card-style">
+                <div class="card-header">
+                    Improve your Feed (Prototype)
+                </div>
+                <div class="card-body">
+                    <div class="checklist-row-striked">
+                        <i class="fas fa-check"></i> Visit your Feed <br/>
+                        <i class="fas fa-check"></i> Follow Topics <br/>
+                        <i class="fas fa-check"></i> Find relevant Answers <br/>
+                        <i class="fas fa-check"></i> Ask your first question <br/>
+                    </div>
+                    <div>
+                        <li>Share your answer on social platform <br/>
+                        </li>
+                        <li>Answer a question <br/>
+                        </li>
+                        <li>Upvote/downvote for an answer <br/>
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 @endsection
