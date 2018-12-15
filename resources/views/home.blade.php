@@ -101,7 +101,21 @@
         padding: 10px;
     }
 </style>
+<script>
+    window.toggleChevron = function (button) {
+        $(button).find('i').toggleClass('far fa-thumbs-up fas fa-thumbs-up');
+    }
+    window.toggleChevron2 = function (button) {
+        $(button).find('i').toggleClass('far fa-thumbs-down fas fa-thumbs-down');
+    }
 
+    function shareURL() {
+        var copyText = document.getElementById("myInput");
+        copyText.select();
+        document.execCommand("copy");
+
+    }
+</script>
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -128,7 +142,16 @@
                             </div>
                             <div class="card-footer text-muted">
                                 <div class="grid-container">
-                                    
+                                    <div class="grid-item">
+                                        <button type="button" onclick="toggleChevron(this)" class="btn zero-style">
+                                            <i class="far fa-thumbs-up"></i>
+                                        </button>
+                                    </div>
+                                    <div class="grid-item">
+                                        <button type="button" onclick="toggleChevron2(this)" class="btn zero-style">
+                                            <i class="far fa-thumbs-down"></i>
+                                        </button>
+                                    </div>
                                     <div class="grid-item custom_padding">
                                         <a href="https://plus.google.com/share?url=https://www.google.com/search?q={{$question->body}}">
                                             <i class="fab fa-google-plus-g"></i>
@@ -155,7 +178,7 @@
 
 
         </div>
-
+        
     </div>
 
 @endsection
