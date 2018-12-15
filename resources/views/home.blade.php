@@ -1,57 +1,161 @@
 @extends('layouts.app')
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<style>
+    .bgstyle {
+        padding-bottom: 14rem !important;
+    }
+
+    .navbar-laravel {
+        background-color: White !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-link {
+        color: rgba(0, 0, 0, .9) !important;
+    }
+
+    .checklist-row-striked {
+        text-decoration: line-through;
+    }
+    .custom_padding{
+        padding-top: 5px;
+    }
+
+    .sidenav {
+        margin-left: 30px;
+        margin-top: 117px;
+        width: 270px;
+        position: fixed;
+        z-index: 1;
+        top: 20px;
+        left: 10px;
+        overflow-x: hidden;
+
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        padding: 2px;
+    }
+
+    .btn-style {
+        margin-left: 8px;
+        min-width: 96px;
+        white-space: nowrap;
+        box-sizing: border-box;
+        border-radius: 3px;
+        box-shadow: 0 1px 1px 0 rgba(200, 200, 200, 0.2);
+        display: inline-block;
+        font-weight: 500;
+        outline: 0;
+        padding: 3px 7px 4px 7px;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        border: 1px solid #b92b27;
+        background: green;
+        color: #fff;
+    }
+
+    .font-style {
+        font-weight: bold;
+        line-height: 1.3;
+        color: #333;
+        font-size: 22px;
+
+    }
+
+    .zero-style {
+        padding: 0;
+        border: none;
+        background: none;
+    }
+
+    .headerstyle {
+        padding-left: 11px;
+        padding-right: 21px;
+    }
+
+    .card-header {
+        background-color: white !important;
+    }
+
+    .card-footer {
+        background-color: white !important;
+    }
+
+    .page-item.active .page-link {
+        color: black !important;
+        background-color: transparent !important;
+        border-color: black !important;
+    }
+
+    .card-style {
+        margin-top: 0;
+        border: 1px solid #efefef;
+        background-color: #fff;
+        border-radius: 4px;
+        border-bottom: 1px solid #e2e2e2;
+        margin-bottom: 4px;
+        padding: 10px;
+    }
+</style>
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Questions
-                        <a class="btn btn-primary float-right" href="{{ route('questions.create') }}">
-                            Create a Question
-                        </a>
-
-                        <div class="card-body">
-
-                            <div class="card-deck">
-                                @forelse($questions as $question)
-                                    <div class="col-sm-4 d-flex align-items-stretch">
-                                        <div class="card mb-3 ">
-                                            <div class="card-header">
-                                                <small class="text-muted">
-                                                    Updated: {{ $question->created_at->diffForHumans() }}
-                                                    Answers: {{ $question->answers()->count() }}
-
-                                                </small>
-                                            </div>
-                                            <div class="card-body">
-                                                <p class="card-text">{{$question->body}}</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text">
-
-                                                    <a class="btn btn-primary float-right" href="{{ route('questions.show', ['id' => $question->id]) }}">
-                                                        View
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @empty
-                                    There are no questions to view, you can  create a question.
-                                @endforelse
-
-
-                            </div>
-
-                        </div>
-                        <div class="card-footer">
-                            <div class="float-right">
-                                {{ $questions->links() }}
-                            </div>
-                        </div>
-
+            <div class="col-md-8">
+                <div class="headerstyle">
+                    <a class="btn btn-style" href="{{ route('questions.create') }}">
+                        Create a Question
+                    </a>
+                    <div class="float-right">
+{{--                        {{ $questions->links() }}--}}
                     </div>
                 </div>
+                @forelse($questions as $question)
+                    <div class="card-body">
+                        <div class="card text-center card-style">
+                            <div class="card-header">
+                                Answers: {{ $question->answers()->count() }}
+                            </div>
+                            <div class="card-body">
+
+                                <h5 class="card-title" id="myInput">{{$question->body}}</h5>
+                                <p class="card-text">Updated: {{ $question->created_at->diffForHumans() }}</p>
+                                <a href="{{ route('questions.show', ['id' => $question->id]) }}" class="btn btn-style">View</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <div class="grid-container">
+                                    
+                                    <div class="grid-item custom_padding">
+                                        <a href="https://plus.google.com/share?url=https://www.google.com/search?q={{$question->body}}">
+                                            <i class="fab fa-google-plus-g"></i>
+                                        </a>
+                                    </div>
+                                    <div class="grid-item custom_padding">
+                                        <a href="https://twitter.com/intent/tweet?url=https://www.google.com/search?q={{$question->body}}">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                    </div>
+                                    <div class="grid-item custom_padding">
+                                        <a href="https://www.facebook.com/sharer.php?u=https://www.google.com/search?q={{$question->body}}">
+                                            <i class="fab fa-facebook">
+                                            </i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    There are no questions to view, you can  create a question.
+                @endforelse
             </div>
+
+
         </div>
+
+    </div>
+
 @endsection

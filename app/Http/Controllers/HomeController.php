@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Question;
 
 
 class HomeController extends Controller
@@ -27,6 +28,8 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $questions = $user->questions()->paginate(6);
+        $questions = Question::all();
+//        $questions = $questions->paginate(6);
         return view('home')->with('questions', $questions);
     }
 }
