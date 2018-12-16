@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Answer;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -51,6 +50,8 @@ class AnswerController extends Controller
         $input = request()->all();
         $question = Question::find($question);
         $Answer = new Answer($input);
+        $Answer->best_reply = FALSE;
+        $Answer->user_name = substr(auth()->user()->email, 0, strpos(auth()->user()->email, '@'));
         $Answer->user()->associate(Auth::user());
         $Answer->question()->associate($question);
         $Answer->save();
@@ -68,7 +69,7 @@ class AnswerController extends Controller
     {
         $answer = Answer::find($answer);
 
-        return view('answer')->with(['answer' => $answer, 'question' => $question]);
+        return view('answer')->with(['answer' => $answer, 'question' => $question ]);
 
     }
 
@@ -105,6 +106,9 @@ class AnswerController extends Controller
 
         $answer = Answer::find($answer);
         $answer->body = $request->body;
+        if($best){
+            $answer->best_reply = TRUE;
+        }
         $answer->save();
 
         return redirect()->route('answers.show',['question_id' => $question, 'answer_id' => $answer])->with('message', 'Updated');
@@ -124,5 +128,17 @@ class AnswerController extends Controller
         $answer->delete();
         return redirect()->route('questions.show',['question_id' => $question])->with('message', 'Delete');
 
+    }
+
+    public function best( $question, $answer)
+    {
+
+        $answer = Answer::find($answer);
+        $answer->best_reply = TRUE;
+        $answer->save();
+
+        return redirect()->route('questions.show',['question_id' => $question])->with('message', 'Best Answer Updated!');
+
+        //return view('question', ['answer' => $answer, 'best' => $best, 'question'=>$question ]);
     }
 }

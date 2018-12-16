@@ -68,6 +68,11 @@
         color: #fff;
     }
 </style>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js">
+
+
+</script>
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
