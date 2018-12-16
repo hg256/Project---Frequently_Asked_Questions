@@ -13,6 +13,7 @@
         background-color: white !important;
     }
 
+
     .card-footer {
         background-color: white !important;
     }
@@ -45,10 +46,17 @@
 @section('content')
     <div class="container">
         <div class="row ">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card card-style">
                     <div class="card-header">
-                        Please find the list of Answers({{ $question->answers()->count() }}) on the right side for the Question Id - {{$question->id}}
+                        <div class="float-left">
+                         <span style="font-size: 20px; color: darkslategray;">
+                                    <i class="fas fa-user-circle" ></i>  {{$question->user_name}}
+                                    </span>
+                        </div>
+                        <div class="float-right">
+                         Answers({{ $question->answers()->count() }})
+                        </div>
                     </div>
                     <div class="card-body">
                         {{$question->body}}
@@ -67,7 +75,8 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><a class="btn btn-style float-left"
                                                 href="{{ route('answers.create', ['question_id'=> $question->id])}}">
@@ -76,15 +85,54 @@
 
                     <div class="card-body">
                         @forelse($question->answers as $answer)
-                            <div class="card">
-                                <div class="card-body">{{$answer->body}}</div>
-                                <div class="card-footer">
+                            <div class="card card-style">
+                                @if($answer->best_reply == FALSE)
+                                    <div class="card-header" >
+                                        <div class="float-left">
+                                            <span style="font-size: 20px; color: darkgreen;">
+                                            <i class="fas fa-user-circle" ></i>  {{$answer->user_name}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                @else()
+                                    <div class="card-header" style="background-color: lightgreen !important;" >
+                                        <div class="float-left">
+                                            <span style="font-size: 20px; color: black;">
+                                            <i class="fas fa-user-circle" ></i>  {{$answer->user_name}}
+                                            </span>
+                                        </div>
+                                        <div class="float-right">
+                                            <i class="fas fa-check"></i> Marked as Best Answer
+                                        </div>
+                                    </div>
+                                @endif
 
-                                    <a class="btn btn-style float-right"
-                                       href="{{ route('answers.show', ['question_id'=> $question->id,'answer_id' => $answer->id]) }}">
-                                        View
+
+                                <div class="card-body">
+                                    {{$answer->body}}
+                                </div>
+                                <div class="card-footer">
+                                    <div>
+                                        {{ Form::open(['method'  => 'DELETE', 'route' => ['answers.destroy', $question, $answer->id]])}}
+                                        <button class="btn btn-style-danger float-left mr-2" value="submit" type="submit" id="submit">Delete
+                                        </button>
+                                        {!! Form::close() !!}
+                                    </div>
+                                    <a class="btn btn-style float-left" href="{{ route('answers.edit',['question_id'=> $question, 'answer_id'=> $answer->id, ])}}">
+                                        Edit Answer
                                     </a>
 
+
+                                    @if($userId == $question->user_id && $question->isBest == FALSE)
+                                    <div>
+                                        {{ Form::open(['method'  => 'STORE', 'route' => ['best-replies.store', $question, $answer]])}}
+                                        <button class="btn btn-style-danger float-right mr-2" value="submit" type="submit" id="submit">Best Answer?
+                                        </button>
+                                        {!! Form::close() !!}
+                                    </div>
+                                    @else()
+                                        <!--Hide the Best Answer Button -->
+                                    @endif
                                 </div>
                             </div>
                         @empty
