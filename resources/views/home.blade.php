@@ -22,7 +22,7 @@
     }
 
     .sidenav {
-        margin-left: 30px;
+        margin-left: 3px;
         margin-top: 117px;
         width: 270px;
         position: fixed;
@@ -101,12 +101,7 @@
     }
 </style>
 <script>
-    window.toggleChevron = function (button) {
-        $(button).find('i').toggleClass('far fa-thumbs-up fas fa-thumbs-up');
-    }
-    window.toggleChevron2 = function (button) {
-        $(button).find('i').toggleClass('far fa-thumbs-down fas fa-thumbs-down');
-    }
+   
 
     function shareURL() {
         var copyText = document.getElementById("myInput");
@@ -128,7 +123,7 @@
                     <div class="card-body">
                         <div class="card text-center card-style">
                             <div class="card-header">
-                                <div class="float-left">
+                                <div class="float-clear-left">
                                     <span style="font-size: 20px; color: darkslategray;">
                                     <i class="fas fa-user-circle" ></i>
                                          {{$question->user_name}}
@@ -171,12 +166,13 @@
                     There are no questions to view, you can  create a question.
                 @endforelse
             </div>
-            <dil class="card-footer">
-                <div class="float-right">
-                    {{$questions->links()}}
-                </div>
-            </dil>
 
+                <div class="card-footer">
+                    <div class="col-md-2">
+                        {{$questions->links()}}
+
+                </div>
+            </div>
         </div>
         <div class="sidenav">
             <div class="card card-style">
@@ -194,8 +190,6 @@
                         <li>Share your answer on social platform <br/>
                         </li>
                         <li>Answer a question <br/>
-                        </li>
-                        <li>Upvote/downvote for an answer <br/>
                         </li>
                     </div>
 
