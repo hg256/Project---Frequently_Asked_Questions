@@ -1,6 +1,5 @@
 @extends('layouts.app')
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
 <style>
     .bgstyle {
         padding-bottom: 14rem !important;
@@ -35,7 +34,7 @@
     }
     .grid-container {
         display: grid;
-        grid-template-columns: auto auto auto auto auto;
+        grid-template-columns: auto auto auto;
         padding: 2px;
     }
 
@@ -124,16 +123,20 @@
                     <a class="btn btn-style" href="{{ route('questions.create') }}">
                         Create a Question
                     </a>
-                    <div class="float-right">
-
-
-                    </div>
                 </div>
                 @forelse($questions as $question)
                     <div class="card-body">
                         <div class="card text-center card-style">
                             <div class="card-header">
-                                Answers: {{ $question->answers()->count() }}
+                                <div class="float-left">
+                                    <span style="font-size: 20px; color: darkslategray;">
+                                    <i class="fas fa-user-circle" ></i>  {{$question->user_name}}
+                                    </span>
+                                </div>
+                                <div class="float-right">
+                                    Answers: {{ $question->answers()->count() }}
+                                </div>
+
                             </div>
                             <div class="card-body">
 
@@ -143,16 +146,7 @@
                             </div>
                             <div class="card-footer text-muted">
                                 <div class="grid-container">
-                                    <div class="grid-item">
-                                        <button type="button" onclick="toggleChevron(this)" class="btn zero-style">
-                                            <i class="far fa-thumbs-up"></i>
-                                        </button>
-                                    </div>
-                                    <div class="grid-item">
-                                        <button type="button" onclick="toggleChevron2(this)" class="btn zero-style">
-                                            <i class="far fa-thumbs-down"></i>
-                                        </button>
-                                    </div>
+
                                     <div class="grid-item custom_padding">
                                         <a href="https://plus.google.com/share?url=https://www.google.com/search?q={{$question->body}}">
                                             <i class="fab fa-google-plus-g"></i>
