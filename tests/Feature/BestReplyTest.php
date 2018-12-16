@@ -12,14 +12,15 @@ class BestReplyTest extends TestCase
 {
     use DatabaseMigrations;
     /** @test */
-    function a_thread_creator_may_mark_any_reply_as_the_best_reply()
+    function a_question_creator_may_mark_any_answer_as_the_best_answer()
     {
-        $this->signIn();
+        $user = factory(\App\User::class)->make();
+        $this->actingAs($user);
         $question = create('App\Question', ['user_id' => auth()->id()]);
-        $answer = create('App\Answer', ['question_id' => $question->id], 2);
-        $this->assertFalse($answer[1]->isBest());
-        $this->postJson(route('best-replies.store', [$answer[1]->id]));
-        $this->assertTrue($answer[1]->fresh()->isBest());
+        $answer = create('App\Answer', ['question_id' => $question], 2);
+        $this->assertFalse($answer[1]->best_reply );
+        $this->postJson(route('best-replies.store', [$question, $answer[1]]));
+        $this->assertTrue($answer[1]->fresh()->best_reply);
     }
 
 }

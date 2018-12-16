@@ -26,11 +26,5 @@ class AnswerTest extends TestCase
         $this->assertTrue($answer->save());
     }
 
-    function best_reply()
-    {
-        $answer = create('App\Answer');
-        $this->assertFalse($answer->isBest());
-        $answer->question->update(['best_reply_id' => $answer->id]);
-        $this->assertTrue($answer->fresh()->isBest());
-    }
+
 }
