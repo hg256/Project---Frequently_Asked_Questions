@@ -16,8 +16,11 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->string('user_name')->nullable();
             $table->longText('body');
+            $table->boolean('isBest')->default(false);
             $table->timestamps();
+
         });
     }
 

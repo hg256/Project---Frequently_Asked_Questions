@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use App\Profile;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
@@ -19,7 +21,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -56,9 +58,11 @@ class QuestionController extends Controller
 
         $question = new Question($input);
         $question->user()->associate(Auth::user());
+        $question->user_name = substr(auth()->user()->email, 0, strpos(auth()->user()->email, '@'));
+        $question->isBest = FALSE;
         $question->save();
 
-        return redirect()->route('home')->with('message', 'IT WORKS!');
+        return redirect()->route('home')->with('message', 'Question has been created successfully');
 
 
 
@@ -75,7 +79,11 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        return view('question')->with('question', $question);
+        $best = FALSE;
+        $userId = Auth::id();
+        $userName = auth()->user()->email;
+        //return view('question')->with(['question', $question ,'best' => $best]);
+        return view('question', ['question' => $question, 'userId' =>$userId, 'userName' =>$userName ]);
     }
 
     /**
@@ -89,6 +97,8 @@ class QuestionController extends Controller
         $edit = TRUE;
         return view('questionForm', ['question' => $question, 'edit' => $edit ]);
     }
+
+
 
     /**
      * Update the specified resource in storage.

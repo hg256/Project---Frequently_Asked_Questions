@@ -16,4 +16,13 @@ class Question extends Model
     {
         return $this->hasMany('App\Answer');
     }
+    /**
+     * Mark the given answer as the best answer.
+     *
+     * @param Answer $answer
+     */
+    public function markBestReply(Answer $answer)
+    {
+        $this->update(['best_reply_id' => $answer->id]);
+    }
 }

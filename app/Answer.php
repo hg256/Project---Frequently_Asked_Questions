@@ -19,4 +19,15 @@ class Answer extends Model
         return $this->belongsTo('App\Question');
     }
 
+    /**
+     * Determine if the current answer is marked as the best.
+     *
+     * @return bool
+     */
+    public function isBest()
+    {
+        return $this->question->best_reply_id == $this->id;
+    }
+
+
 }
