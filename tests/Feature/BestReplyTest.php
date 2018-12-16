@@ -12,7 +12,7 @@ class BestReplyTest extends TestCase
 {
     use DatabaseMigrations;
     /** @test */
-    function a_question_creator_may_mark_any_answer_as_the_best_answer()
+    function best_answer()
     {
         $this->signIn();
         $question = create('App\Question', ['user_id' => auth()->id()]);

@@ -130,7 +130,8 @@
                             <div class="card-header">
                                 <div class="float-left">
                                     <span style="font-size: 20px; color: darkslategray;">
-                                    <i class="fas fa-user-circle" ></i>  {{$question->user_name}}
+                                    <i class="fas fa-user-circle" ></i>
+                                         {{$question->user_name}}
                                     </span>
                                 </div>
                                 <div class="float-right">
