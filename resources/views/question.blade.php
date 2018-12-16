@@ -126,7 +126,7 @@
                                     @if($userId == $question->user_id && $question->isBest == FALSE)
                                     <div>
                                         {{ Form::open(['method'  => 'STORE', 'route' => ['best-replies.store', $question, $answer]])}}
-                                        <button class="btn btn-style-danger float-right mr-2" value="submit" type="submit" id="submit">Best Answer?
+                                        <button class="btn btn-default float-right mr-2" style="color: white;background: dodgerblue;" value="submit" type="submit" id="submit">Best Answer?
                                         </button>
                                         {!! Form::close() !!}
                                     </div>
