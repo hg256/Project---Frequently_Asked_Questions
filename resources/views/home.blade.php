@@ -101,7 +101,7 @@
     }
 </style>
 <script>
-   
+
 
     function shareURL() {
         var copyText = document.getElementById("myInput");
@@ -112,8 +112,8 @@
 </script>
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div style="margin-left:10rem;">
+            <div class="col-md-12">
                 <div class="headerstyle">
                     <a class="btn btn-style" href="{{ route('questions.create') }}">
                         Create a Question
@@ -123,13 +123,13 @@
                     <div class="card-body">
                         <div class="card text-center card-style">
                             <div class="card-header">
-                                <div class="float-clear-left">
+                                <div>
                                     <span style="font-size: 20px; color: darkslategray;">
                                     <i class="fas fa-user-circle" ></i>
                                          {{$question->user_name}}
                                     </span>
                                 </div>
-                                <div class="float-right">
+                                <div>
                                     Answers: {{ $question->answers()->count() }}
                                 </div>
 
@@ -167,7 +167,7 @@
                 @endforelse
             </div>
 
-                <div class="card-footer">
+                <div class="card-footer" style="margin-left:2rem;margin-right:2rem;">
                     <div class="col-md-2">
                         {{$questions->links()}}
 
