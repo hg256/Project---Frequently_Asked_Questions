@@ -24,10 +24,7 @@ class Answer extends Model
      *
      * @return bool
      */
-    public function isBest()
-    {
-        return $this->question->best_reply_id == $this->id;
-    }
+
 
 
 }
