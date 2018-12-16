@@ -114,7 +114,7 @@
                                 <div class="card-footer">
                                     <div>
                                         {{ Form::open(['method'  => 'DELETE', 'route' => ['answers.destroy', $question, $answer->id]])}}
-                                        <button class="btn btn-style-danger float-left mr-2" value="submit" type="submit" id="submit">Delete
+                                        <button class="btn btn-danger float-left mr-2" value="submit" type="submit" id="submit">Delete
                                         </button>
                                         {!! Form::close() !!}
                                     </div>
