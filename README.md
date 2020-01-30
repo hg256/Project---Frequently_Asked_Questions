@@ -1,3 +1,7 @@
+**PROJECT : WEBPAGE WITH FREQUENTLY ASKED QUESTIONS**
+
+Description - Building a web page where one can raise and address common concerns, questions, and objections on an open forum. Multiple answers for one question can be judged to pick the best answer by majority of the users. More details of the project can be found in the user stories section.
+
 **To run the FAQ project:**
 
 
